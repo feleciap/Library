@@ -1,4 +1,5 @@
 import json
+import os
 from typing import List, Union
 from book import Book
 
@@ -62,3 +63,10 @@ class Library:
             print(f"\nСтатус книги с ID {book_id} успешно обновлён на '{status_text}'!\n")
         else:
             print("\nОшибка: Книга с таким ID не найдена.\n")
+
+    def save_books(self):
+        if not os.path.exists(os.path.dirname(self.file_path)):
+            os.makedirs(os.path.dirname(self.file_path))
+
+        with open(self.file_path, "w", encoding="utf-8") as f:
+            json.dump([book.__dict__ for book in self.books], f, ensure_ascii=False, indent=4)
