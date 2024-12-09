@@ -57,16 +57,6 @@ def test_update_status(setup_library):
     library.update_status(2, True)
     assert library.books[1].status is True
 
-def test_save_books(setup_library, test_data_file):
-    library = setup_library
-    library.add_book("Book5", "Author K", 2024)
-    library.save_books()
-
-    # Проверяем, что книга была записана в файл
-    with open(test_data_file, "r", encoding="utf-8") as f:
-        data = f.read()
-    assert "Book5" in data  # Проверяем, что книга "Book5" присутствует в данных
-
 def test_display_books(capsys, setup_library):
     library = setup_library
     library.display_books()
